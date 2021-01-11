@@ -17,14 +17,43 @@ def clear_button():
 
 def add_button():
     global f_num
+    global div_pass
+    global mult_pass
     first_num = e.get()
     f_num = int(first_num)
     e.delete(0, END)
+    mult_pass = False
+    div_pass = False
 
 def equal_button():
     second_num = e.get()
     e.delete(0, END)
-    e.insert(0, f_num + int(second_num))
+    if mult_pass == True and div_pass == False:
+        e.insert(0, f_num * int(second_num))
+    if div_pass == True and mult_pass == False:
+        e.insert(0, f_num / int(second_num))
+    if div_pass == False and mult_pass == False:
+        e.insert(0, f_num + int(second_num))
+
+def mult_button():
+    global mult_pass
+    global div_pass
+    global f_num
+    first_num = e.get()
+    f_num = int(first_num)
+    e.delete(0, END)
+    mult_pass = True
+    div_pass = False
+
+def div_button():
+    global div_pass
+    global mult_pass
+    global f_num
+    first_num = e.get()
+    f_num = int(first_num)
+    e.delete(0, END)
+    div_pass = True
+    mult_pass = False
 
 
 
@@ -40,7 +69,9 @@ button_9 = Button(root, text = "9", padx = 40, pady= 20, command = lambda: butto
 button_0 = Button(root, text = "0", padx = 40, pady= 20, command = lambda: button_click(0))
 button_add = Button(root, text = "+", padx = 40, pady= 20, command = lambda: add_button())
 button_equal = Button(root, text = "=", padx = 40, pady= 20, command = lambda: equal_button())
-button_clear = Button(root, text = "CLR", padx = 40, pady= 20, command = lambda: clear_button())
+button_clear = Button(root, text = "C", padx = 40, pady= 20, command = lambda: clear_button())
+button_div = Button(root, text = "/", padx = 40, pady= 20, command = lambda: div_button())
+button_mult = Button(root, text = "x", padx = 40, pady= 20, command = lambda: mult_button())
 #LOCATIONS OF BUTTONS
 
 button_1.grid(row = 3, column = 0)
@@ -60,5 +91,7 @@ button_0.grid(row = 4, column = 1)
 button_add.grid(row = 4, column = 2)
 button_clear.grid(row = 5, column = 1)
 button_equal.grid(row = 4, column = 0)
+button_div.grid(row = 5, column = 0)
+button_mult.grid(row = 5, column = 2)
 
 root.mainloop()
